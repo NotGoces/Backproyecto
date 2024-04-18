@@ -16,16 +16,15 @@ public class Chip  implements Serializable {
 
     private String zipLink;
 
-
     private String tapLink;
 
     private Boolean estado = false;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "codUsuario", nullable = false)
     private Usuario codUsuario;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codGrupo")
     private Grupo codGrupo;
 
