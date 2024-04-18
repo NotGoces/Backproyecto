@@ -6,11 +6,12 @@ import com.example.proyectoback.Servicios.GrupoService;
 import com.example.proyectoback.Servicios.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -19,10 +20,47 @@ import java.util.List;
 public class GrupoController {
 
     private final GrupoService grupoService;
+    private final UsuarioService usuarioService;
 
     @GetMapping("/all")
     public List<Grupo> getGrupo() {
         return (grupoService.grupos());
+    }
+
+    @PostMapping("/crear")
+    public ResponseEntity<String> crearGrupo(@RequestBody Grupo grupo) {
+        try {
+            Grupo grupoNuevo = grupoService.nuevoGrupo(grupo);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Grupo creado correctamente");
+        } catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el grupo");
+        }
+    }
+
+    @GetMapping("/mostrarbyuser")
+    public ResponseEntity<List<Grupo>> getGrupoByUser(@RequestParam Integer id) {
+        try {
+            return ResponseEntity.ok(grupoService.encontrarGruposPorUsuario(id));
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
+
+    @DeleteMapping("/borrar/{id}")
+    public ResponseEntity<String> borrarGrupo(@PathVariable("id") Integer id) {
+        try {
+            Grupo grupo = grupoService.encontrarGrupo(id).orElse(null);
+            if (grupo != null) {
+                grupoService.borrarGrupo(id);
+                return ResponseEntity.ok("Grupo eliminado correctamente");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el grupo con el ID especificado");
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al borrar el grupo");
+        }
     }
 
 }

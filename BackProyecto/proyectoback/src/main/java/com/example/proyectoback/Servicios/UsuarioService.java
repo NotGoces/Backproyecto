@@ -22,4 +22,6 @@ public class UsuarioService {
     public List<Usuario> usuarios() {
         return new ArrayList<>(usuarioRepositorio.findAll());
     }
+
+
 }

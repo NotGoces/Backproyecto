@@ -28,4 +28,6 @@ public class Chip  implements Serializable {
     @JoinColumn(name = "codGrupo")
     private Grupo codGrupo;
 
+    private String nombre;
+
 }
