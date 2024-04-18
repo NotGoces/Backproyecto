@@ -3,8 +3,8 @@ package com.example.proyectoback.Repositorio.JDBC.impl;
 import com.example.proyectoback.Modelo.Grupo;
 import com.example.proyectoback.Repositorio.JDBC.JDBCGrupoRepositorio;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.sql.Update;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -22,5 +22,10 @@ public class JDBCGrupoRepositorioImpl implements JDBCGrupoRepositorio {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("idUsuario", idUsuario);
         return jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(Grupo.class));
+    }
+
+    @Override
+    public void cambiarEstadoGrupo(Integer idGrupo) {
+        String SQL= "UPDATE GRUPO SET Estado = :Estado WHERE IdGrupo = :IdGrupo";
     }
 }

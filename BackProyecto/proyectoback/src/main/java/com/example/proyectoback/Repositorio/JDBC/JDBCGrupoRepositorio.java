@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface JDBCGrupoRepositorio {
     List<Grupo> findGrupoByIdUsuario(Integer idUsuario);
+    void cambiarEstadoGrupo(Integer idGrupo);
 }

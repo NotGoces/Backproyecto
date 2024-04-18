@@ -63,4 +63,20 @@ public class GrupoController {
         }
     }
 
+    @PutMapping("/cambiarEstado")
+    public ResponseEntity<String> cambiarEstadoGrupo(@RequestParam Integer id) {
+        try {
+            Grupo grupo = grupoService.encontrarGrupo(id).orElse(null);
+            if (grupo != null) {
+                grupoService.cambiarEstadoGrupo(id);
+                return ResponseEntity.ok("Estado de grupo cambiado correctamente");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el grupo con el ID especificado");
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al cambiar el estado del grupo");
+        }
+    }
+
 }

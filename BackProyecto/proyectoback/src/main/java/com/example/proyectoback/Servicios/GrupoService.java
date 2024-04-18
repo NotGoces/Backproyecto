@@ -32,6 +32,18 @@ public class GrupoService {
         grupoRepositorio.deleteById(id);
     }
 
+    //Cambiar por id el estado de un grupo
+    public void cambiarEstadoGrupo(Integer id){
+        Grupo grupo=grupoRepositorio.findById(id).orElse(null);
+        if (grupo.getEstado()){
+            grupo.setEstado(false);
+            grupoRepositorio.save(grupo);
+        }else{
+            grupo.setEstado(true);
+            grupoRepositorio.save(grupo);
+        }
+    }
+
     //Buscar por id un grupo
     public Optional<Grupo> encontrarGrupo(Integer id) {
         return grupoRepositorio.findById(id);
@@ -46,4 +58,5 @@ public class GrupoService {
     public List<Grupo> grupos() {
         return new ArrayList<>(grupoRepositorio.findAll());
     }
+
 }
