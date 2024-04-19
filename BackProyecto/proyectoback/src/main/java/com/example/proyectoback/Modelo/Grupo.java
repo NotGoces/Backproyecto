@@ -20,5 +20,6 @@ public class Grupo {
     @Column(name = "Nombre", nullable = false)
     private String nombre;
 
+    @Column(name = "IdUsuario", nullable = false)
     private Integer idUsuario;
 }

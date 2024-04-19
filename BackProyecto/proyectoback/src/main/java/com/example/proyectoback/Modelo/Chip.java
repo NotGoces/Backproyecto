@@ -22,11 +22,12 @@ public class Chip {
     @Column(name = "ZipLink", nullable = false)
     private String zipLink;
 
-    @Column(name = "TapLink", nullable = false)
+    @Column(name = "ZipLink")
     private String tapLink;
 
     @Column(name = "Nombre", nullable = false)
     private String nombre;
 
+    @Column(name = "CodGrupo", nullable = false)
     private Integer codGrupo;
 }
