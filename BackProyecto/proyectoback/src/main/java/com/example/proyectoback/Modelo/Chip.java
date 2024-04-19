@@ -20,10 +20,6 @@ public class Chip  implements Serializable {
 
     private Boolean estado = false;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "codUsuario", nullable = false)
-    private Usuario codUsuario;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codGrupo")
     private Grupo codGrupo;

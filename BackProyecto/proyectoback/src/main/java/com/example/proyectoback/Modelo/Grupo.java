@@ -12,7 +12,7 @@ public class Grupo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CodGrupo", nullable = false)
-    private Integer id;
+    private Integer CodGrupo;
 
     @Column(name = "Estado", nullable = false)
     private Boolean estado = false;

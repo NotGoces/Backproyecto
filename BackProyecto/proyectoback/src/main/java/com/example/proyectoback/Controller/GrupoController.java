@@ -1,17 +1,13 @@
 package com.example.proyectoback.Controller;
 
 import com.example.proyectoback.Modelo.Grupo;
-import com.example.proyectoback.Modelo.Usuario;
 import com.example.proyectoback.Servicios.GrupoService;
-import com.example.proyectoback.Servicios.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -20,12 +16,6 @@ import java.util.Optional;
 public class GrupoController {
 
     private final GrupoService grupoService;
-    private final UsuarioService usuarioService;
-
-    @GetMapping("/all")
-    public List<Grupo> getGrupo() {
-        return (grupoService.grupos());
-    }
 
     @PostMapping("/crear")
     public ResponseEntity<String> crearGrupo(@RequestBody Grupo grupo) {
