@@ -17,8 +17,8 @@ public class Grupo {
     @Column(name = "Estado", nullable = false)
     private Boolean estado = false;
 
-    private Integer idUsuario;
-
     @Column(name = "Nombre", nullable = false)
     private String nombre;
+
+    private Integer idUsuario;
 }

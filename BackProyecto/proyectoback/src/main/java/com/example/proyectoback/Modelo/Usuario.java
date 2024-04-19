@@ -20,8 +20,7 @@ public class Usuario {
     @Column(name = "`contraseña`", nullable = false)
     private String contraseña;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CodRol")
-    private Role codRol;
-
+    @Column(name = "`CodRol`", nullable = false)
+    private Boolean codRol = false;
+    //USERS SON 0 FALSE ADMINS SON 1 TRUE, por defecto son users
 }

@@ -10,20 +10,23 @@ import java.io.Serializable;
 @Setter
 @Entity
 @Table(name = "chip")
-public class Chip  implements Serializable {
+public class Chip {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "IdChip", nullable = false)
     private Integer idChip;
 
-    private String zipLink;
-
-    private String tapLink;
-
+    @Column(name = "Estado", nullable = false)
     private Boolean estado = false;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "codGrupo")
-    private Grupo codGrupo;
+    @Column(name = "ZipLink", nullable = false)
+    private String zipLink;
 
+    @Column(name = "TapLink", nullable = false)
+    private String tapLink;
+
+    @Column(name = "Nombre", nullable = false)
     private String nombre;
 
+    private Integer codGrupo;
 }
