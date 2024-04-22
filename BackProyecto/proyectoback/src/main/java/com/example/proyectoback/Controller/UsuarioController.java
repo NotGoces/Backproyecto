@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,8 +23,17 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @GetMapping("/all")
-    public List<Usuario> getUsuario() {
-        return (usuarioService.usuarios());
+    public List<UsuarioOutputDto> getUsuarios() {
+        List<Usuario> usuarios = usuarioService.usuarios();
+        List<UsuarioOutputDto> usuariosOutputDto = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            UsuarioOutputDto dto = new UsuarioOutputDto();
+            dto.setIdUsuario(usuario.getIdUsuario());
+            dto.setCorreo(usuario.getCorreo());
+            dto.setCodRol(usuario.getCodRol());
+            usuariosOutputDto.add(dto);
+        }
+        return usuariosOutputDto;
     }
 
     @PostMapping("/crear")

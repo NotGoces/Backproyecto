@@ -26,22 +26,18 @@ public class UsuarioService {
         return new ArrayList<>(usuarioRepositorio.findAll());
     }
 
-    //Crear un usuario
     public Usuario nuevoUsuario(Usuario usuario) {
         return this.usuarioRepositorio.save(usuario);
     }
 
-    //Borrar un ususario
     public void borrarUsuario(Integer id) {
         usuarioRepositorio.deleteById(id);
     }
 
-    //Buscar por id un usuario NO COMPROBADO FUNCIONAMIENTO
     public Optional<Usuario> encontrarUsuario(Integer id) {
         return usuarioRepositorio.findById(id);
     }
 
-    //Hacer login
     public UsuarioOutputDto login(LoginRequest usuario) {
         return JDBCUsuarioRepositorio.login(usuario);
     }
