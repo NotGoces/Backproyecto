@@ -8,4 +8,6 @@ import java.util.List;
 public interface JDBCChipRepositorio {
     List<Chip> findChipByIdUsuario(Integer idUsuario);
     void cambiarEstadoChip(Integer idChip);
+    void cambiarNombreChip(Integer idChip);
+    void cambiarTaplinkChip(Integer idChip);
 }
