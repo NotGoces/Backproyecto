@@ -46,7 +46,7 @@ public class GrupoService {
         return jdbcGrupoRepositorio.findGrupoByIdUsuario(id);
     }
 
-    //Buscar por id un grupo NO COMPROBADO FUNCIONAMIENTO
+    //Buscar por id un grupo
     public Optional<Grupo> encontrarGrupo(Integer id) {
         return grupoRepositorio.findById(id);
     }

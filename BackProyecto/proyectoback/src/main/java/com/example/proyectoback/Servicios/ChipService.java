@@ -43,20 +43,38 @@ public class ChipService {
         }
     }
 
-    //Buscar por id un Chip
-    public Optional<Chip> encontrarChip(Integer id) {
-        return chipRepositorio.findById(id);
-    }
 
     //Renombrar un chip
-
+    public void cambiarNombreChip(Integer id){
+        Chip chip=chipRepositorio.findById(id).orElse(null);
+        if (chip.getEstado()){
+            chip.setEstado(false);
+            chipRepositorio.save(chip);
+        } else {
+            chip.setEstado(true);
+            chipRepositorio.save(chip);
+        }
+    }
     //Renombrar un tapLink
-
-    //Encontrar los chips de un grupo especifico
+    public void cambiarTapLinkChip(Integer id){
+        Chip chip=chipRepositorio.findById(id).orElse(null);
+        if (chip.getEstado()){
+            chip.setEstado(false);
+            chipRepositorio.save(chip);
+        } else {
+            chip.setEstado(true);
+            chipRepositorio.save(chip);
+        }
+    }
 
     //Encontrar chips de un usuario especifico
     public List<Chip> encontrarChipsPorUsuario(Integer id){
         return jdbcChipRepositorio.findChipByIdUsuario(id);
+    }
+
+    //Buscar por id un Chip
+    public Optional<Chip> encontrarChip(Integer id) {
+        return chipRepositorio.findById(id);
     }
 
     //Encontrar todos los chips

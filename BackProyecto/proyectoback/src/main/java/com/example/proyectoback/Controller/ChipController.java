@@ -17,11 +17,6 @@ public class ChipController {
 
     private final ChipService chipService;
 
-    @GetMapping("/all")
-    public List<Chip> getChip() {
-        return (chipService.chips());
-    }
-
     @PostMapping("/crear")
     public ResponseEntity<String> crearChip(@RequestBody Chip chip) {
         try {
@@ -58,13 +53,45 @@ public class ChipController {
         }
     }
 
-    @PutMapping("/cambiarEstado")
-    public ResponseEntity<String> cambiarEstadoChip(@RequestParam Integer id) {
+    @PutMapping("/cambiarEstado/{id}")
+    public ResponseEntity<String> cambiarEstadoChip(@PathVariable("id") Integer id) {
         try {
             Chip chip = chipService.encontrarChip(id).orElse(null);
             if (chip != null) {
                 chipService.cambiarEstadoChip(id);
                 return ResponseEntity.ok("Estado de chip cambiado correctamente");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el chip con el ID especificado");
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al cambiar el estado del chip");
+        }
+    }
+
+    @PutMapping("/cambiarNombre/{id}")
+    public ResponseEntity<String> cambiarNombre(@PathVariable("id") Integer id) {
+        try {
+            Chip chip = chipService.encontrarChip(id).orElse(null);
+            if (chip != null) {
+                chipService.cambiarEstadoChip(id);
+                return ResponseEntity.ok("Nombre de chip cambiado correctamente");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el chip con el ID especificado");
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al cambiar el estado del chip");
+        }
+    }
+
+    @PutMapping("/cambiarTapLink/{id}")
+    public ResponseEntity<String> cambiarTapLinkChip(@PathVariable("id") Integer id) {
+        try {
+            Chip chip = chipService.encontrarChip(id).orElse(null);
+            if (chip != null) {
+                chipService.cambiarEstadoChip(id);
+                return ResponseEntity.ok("Taplink de chip cambiado correctamente");
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el chip con el ID especificado");
             }

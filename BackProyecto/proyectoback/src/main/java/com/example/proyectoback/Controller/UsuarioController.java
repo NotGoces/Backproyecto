@@ -1,6 +1,8 @@
 package com.example.proyectoback.Controller;
 
 
+import com.example.proyectoback.Dto.LoginRequest;
+import com.example.proyectoback.Dto.UsuarioOutputDto;
 import com.example.proyectoback.Modelo.Usuario;
 import com.example.proyectoback.Servicios.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +31,7 @@ public class UsuarioController {
         try {
             Usuario usuarioNuevo = usuarioService.nuevoUsuario(usuario);
             return ResponseEntity.status(HttpStatus.CREATED).body("Usuario creado correctamente");
-        } catch (Exception ex){
+        } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el usuario");
         }
     }
@@ -44,9 +46,29 @@ public class UsuarioController {
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el Usuario con el ID especificado");
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al borrar el usuario");
+        }
+    }
+
+    @PostMapping(path = "/login")
+    public ResponseEntity<UsuarioOutputDto> login(@RequestBody LoginRequest loginRequest) {
+        try {
+            String correo = loginRequest.getCorreo();
+            String contraseña = loginRequest.getContraseña();
+
+            if (usuarioService.login(loginRequest) == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+
+            } else {
+                return ResponseEntity.ok(usuarioService.login(loginRequest));
+
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 

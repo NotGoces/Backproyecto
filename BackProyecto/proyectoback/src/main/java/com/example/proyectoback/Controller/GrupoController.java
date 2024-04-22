@@ -53,8 +53,8 @@ public class GrupoController {
         }
     }
 
-    @PutMapping("/cambiarEstado")
-    public ResponseEntity<String> cambiarEstadoGrupo(@RequestParam Integer id) {
+    @PutMapping("/cambiarEstado/{id}")
+    public ResponseEntity<String> cambiarEstadoGrupo(@PathVariable("id") Integer id) {
         try {
             Grupo grupo = grupoService.encontrarGrupo(id).orElse(null);
             if (grupo != null) {

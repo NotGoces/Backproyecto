@@ -1,7 +1,10 @@
 package com.example.proyectoback.Servicios;
 
+import com.example.proyectoback.Dto.LoginRequest;
+import com.example.proyectoback.Dto.UsuarioOutputDto;
 import com.example.proyectoback.Modelo.Grupo;
 import com.example.proyectoback.Modelo.Usuario;
+import com.example.proyectoback.Repositorio.JDBC.JDBCUsuarioRepositorio;
 import com.example.proyectoback.Repositorio.UsuarioRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,8 +17,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UsuarioService {
 
-  private final UsuarioRepositorio UsuarioRepositorio;
     private final UsuarioRepositorio usuarioRepositorio;
+
+    private final JDBCUsuarioRepositorio JDBCUsuarioRepositorio;
 
 
     public List<Usuario> usuarios() {
@@ -23,7 +27,7 @@ public class UsuarioService {
     }
 
     //Crear un usuario
-    public Usuario nuevoUsuario(Usuario usuario){
+    public Usuario nuevoUsuario(Usuario usuario) {
         return this.usuarioRepositorio.save(usuario);
     }
 
@@ -35,5 +39,10 @@ public class UsuarioService {
     //Buscar por id un usuario NO COMPROBADO FUNCIONAMIENTO
     public Optional<Usuario> encontrarUsuario(Integer id) {
         return usuarioRepositorio.findById(id);
+    }
+
+    //Hacer login
+    public UsuarioOutputDto login(LoginRequest usuario) {
+        return JDBCUsuarioRepositorio.login(usuario);
     }
 }

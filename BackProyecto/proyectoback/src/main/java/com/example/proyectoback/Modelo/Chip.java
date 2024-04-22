@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Table(name = "chip")
 public class Chip {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdChip", nullable = false)
     private Integer idChip;
 
@@ -22,7 +21,7 @@ public class Chip {
     @Column(name = "ZipLink", nullable = false)
     private String zipLink;
 
-    @Column(name = "ZipLink")
+    @Column(name = "TapLink")
     private String tapLink;
 
     @Column(name = "Nombre", nullable = false)

@@ -12,7 +12,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdUsuario", nullable = false)
-    private Integer id;
+    private Integer IdUsuario;
 
     @Column(name = "correo", nullable = false)
     private String correo;
@@ -22,5 +22,4 @@ public class Usuario {
 
     @Column(name = "`CodRol`", nullable = false)
     private Boolean codRol = false;
-    //USERS SON 0 FALSE ADMINS SON 1 TRUE, por defecto son users
 }
