@@ -45,15 +45,11 @@ public class ChipService {
 
 
     //Renombrar un chip
-    public void cambiarNombreChip(Integer id){
+    public void cambiarNombreChip(Integer id, String nombre){
         Chip chip=chipRepositorio.findById(id).orElse(null);
-        if (chip.getEstado()){
-            chip.setEstado(false);
-            chipRepositorio.save(chip);
-        } else {
-            chip.setEstado(true);
-            chipRepositorio.save(chip);
-        }
+       if(chip!=null){
+           chip.setNombre(nombre);
+       }
     }
     //Renombrar un tapLink
     public void cambiarTapLinkChip(Integer id){

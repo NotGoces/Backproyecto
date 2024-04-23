@@ -31,11 +31,11 @@ public class JDBCChipRepositotioImpl implements JDBCChipRepositorio {
 
     @Override
     public void cambiarNombreChip(Integer idChip) {
-        String SQL= "UPDATE CHIP SET Nombre = :Nombre WHERE id_chip = :idChip";
+        String SQL= "UPDATE CHIP SET nombre = :nombre WHERE id_chip = :idChip";
     }
 
     @Override
     public void cambiarTaplinkChip(Integer idChip) {
-        String SQL= "UPDATE CHIP SET Taplink = :Taplink WHERE id_chip = :idChip";
+        String SQL= "UPDATE CHIP SET taplink = :taplink WHERE id_chip = :idChip";
     }
 }

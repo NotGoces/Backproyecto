@@ -69,35 +69,23 @@ public class ChipController {
         }
     }
 
-    @PutMapping("/cambiarNombre/{id}")
-    public ResponseEntity<String> cambiarNombre(@PathVariable("id") Integer id) {
+    @PutMapping("/cambiarNombre")
+    public ResponseEntity<String> cambiarNombreChip(@RequestBody Chip chip) {
         try {
-            Chip chip = chipService.encontrarChip(id).orElse(null);
-            if (chip != null) {
-                chipService.cambiarEstadoChip(id);
-                return ResponseEntity.ok("Nombre de chip cambiado correctamente");
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el chip con el ID especificado");
-            }
-        }catch (Exception ex){
-            ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al cambiar el estado del chip");
+            Chip chipNuevo = chipService.nuevoChip(chip);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Nombre cambiado correctamente");
+        } catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al editar el chip");
         }
     }
 
-    @PutMapping("/cambiarTapLink/{id}")
-    public ResponseEntity<String> cambiarTapLinkChip(@PathVariable("id") Integer id) {
+    @PutMapping("/cambiarTapLink")
+    public ResponseEntity<String> cambiarTapLinkChip(@RequestBody Chip chip) {
         try {
-            Chip chip = chipService.encontrarChip(id).orElse(null);
-            if (chip != null) {
-                chipService.cambiarEstadoChip(id);
-                return ResponseEntity.ok("Taplink de chip cambiado correctamente");
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el chip con el ID especificado");
-            }
-        }catch (Exception ex){
-            ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al cambiar el estado del chip");
+            Chip chipNuevo = chipService.nuevoChip(chip);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Taplink cambiado correctamente");
+        } catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al editar el chip");
         }
     }
 }
