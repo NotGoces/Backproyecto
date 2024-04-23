@@ -21,7 +21,7 @@ public class ChipService {
     private final JDBCChipRepositorio jdbcChipRepositorio;
 
 
-    //Añadir un chip
+    //Crear un chip
     public Chip nuevoChip(Chip chip) {
         return this.chipRepositorio.save(chip);
     }

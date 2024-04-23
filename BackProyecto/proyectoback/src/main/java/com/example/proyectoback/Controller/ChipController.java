@@ -27,7 +27,7 @@ public class ChipController {
         }
     }
 
-    @GetMapping("/mostrarbyuser")
+    @GetMapping("/mostrarbygrupo")
     public ResponseEntity<List<Chip>> getChipoByUser(@RequestParam Integer id) {
         try {
             return ResponseEntity.ok(chipService.encontrarChipsPorUsuario(id));

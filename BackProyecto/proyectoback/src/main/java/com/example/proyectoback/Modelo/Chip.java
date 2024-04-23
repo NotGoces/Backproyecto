@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Table(name = "chip")
 public class Chip {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdChip", nullable = false)
     private Integer idChip;
 
