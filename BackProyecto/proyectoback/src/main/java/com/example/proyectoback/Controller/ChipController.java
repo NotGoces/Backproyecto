@@ -1,5 +1,6 @@
 package com.example.proyectoback.Controller;
 
+import com.example.proyectoback.Dto.ChipInputDto;
 import com.example.proyectoback.Modelo.Chip;
 import com.example.proyectoback.Servicios.ChipService;
 import lombok.RequiredArgsConstructor;
@@ -69,23 +70,12 @@ public class ChipController {
         }
     }
 
-    @PutMapping("/cambiarNombre")
-    public ResponseEntity<String> cambiarNombreChip(@RequestBody Chip chip) {
-        try {
-            Chip chipNuevo = chipService.nuevoChip(chip);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Nombre cambiado correctamente");
-        } catch (Exception ex){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al editar el chip");
-        }
-    }
-
-    @PutMapping("/cambiarTapLink")
-    public ResponseEntity<String> cambiarTapLinkChip(@RequestBody Chip chip) {
-        try {
-            Chip chipNuevo = chipService.nuevoChip(chip);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Taplink cambiado correctamente");
-        } catch (Exception ex){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al editar el chip");
+    @PutMapping("/modificar")
+    public void modificarChip(@RequestBody ChipInputDto chip) {
+        try{
+             chipService.modificarChip(chip);
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
     }
 }

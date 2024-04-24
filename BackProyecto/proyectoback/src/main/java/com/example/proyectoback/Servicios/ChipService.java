@@ -1,12 +1,14 @@
 package com.example.proyectoback.Servicios;
 
 
+import com.example.proyectoback.Dto.ChipInputDto;
 import com.example.proyectoback.Modelo.Chip;
 import com.example.proyectoback.Repositorio.ChipRepositorio;
 import com.example.proyectoback.Repositorio.JDBC.JDBCChipRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ChipService {
 
-  private final ChipRepositorio chipRepositorio;
+    private final ChipRepositorio chipRepositorio;
 
     @Qualifier("JDBCChipRepositorio")
     private final JDBCChipRepositorio jdbcChipRepositorio;
@@ -32,9 +34,9 @@ public class ChipService {
     }
 
     //Apagar encender un chip por id
-    public void cambiarEstadoChip(Integer id){
-        Chip chip=chipRepositorio.findById(id).orElse(null);
-        if (chip.getEstado()){
+    public void cambiarEstadoChip(Integer id) {
+        Chip chip = chipRepositorio.findById(id).orElse(null);
+        if (chip.getEstado()) {
             chip.setEstado(false);
             chipRepositorio.save(chip);
         } else {
@@ -43,28 +45,28 @@ public class ChipService {
         }
     }
 
-
-    //Renombrar un chip
-    public void cambiarNombreChip(Integer id, String nombre){
-        Chip chip=chipRepositorio.findById(id).orElse(null);
-       if(chip!=null){
-           chip.setNombre(nombre);
-       }
-    }
     //Renombrar un tapLink
-    public void cambiarTapLinkChip(Integer id){
-        Chip chip=chipRepositorio.findById(id).orElse(null);
-        if (chip.getEstado()){
-            chip.setEstado(false);
-            chipRepositorio.save(chip);
-        } else {
-            chip.setEstado(true);
-            chipRepositorio.save(chip);
+    public void modificarChip(ChipInputDto chipInputDto) {
+        Chip chip = chipRepositorio.findById(chipInputDto.getId()).orElse(null);
+
+        if (chip != null) {
+
+            if (chipInputDto.getNombre() == null) {
+                chip.setTapLink(chipInputDto.getTapLink());
+                chipRepositorio.save(chip);
+            } else if (chipInputDto.getTapLink() == null) {
+                chip.setNombre(chipInputDto.getNombre());
+                chipRepositorio.save(chip);
+            } else {
+                chip.setNombre(chipInputDto.getNombre());
+                chip.setTapLink(chipInputDto.getTapLink());
+                chipRepositorio.save(chip);
+            }
         }
     }
 
     //Encontrar chips de un usuario especifico
-    public List<Chip> encontrarChipsPorUsuario(Integer id){
+    public List<Chip> encontrarChipsPorUsuario(Integer id) {
         return jdbcChipRepositorio.findChipByIdUsuario(id);
     }
 
@@ -77,5 +79,6 @@ public class ChipService {
     public List<Chip> chips() {
         return new ArrayList<>(chipRepositorio.findAll());
     }
+
 
 }

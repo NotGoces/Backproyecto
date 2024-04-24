@@ -62,6 +62,7 @@ public class UsuarioController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping(path = "/login")
     public ResponseEntity<UsuarioOutputDto> login(@RequestBody LoginRequest loginRequest) {
         try {
@@ -69,7 +70,7 @@ public class UsuarioController {
             String contraseña = loginRequest.getContraseña();
 
             if (usuarioService.login(loginRequest) == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+                return ResponseEntity.status(999).body(null);
 
             } else {
                 return ResponseEntity.ok(usuarioService.login(loginRequest));
