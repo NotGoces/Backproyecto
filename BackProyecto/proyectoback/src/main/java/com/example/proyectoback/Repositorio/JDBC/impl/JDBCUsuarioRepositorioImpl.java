@@ -20,7 +20,7 @@ public class JDBCUsuarioRepositorioImpl implements JDBCUsuarioRepositorio {
 
     @Override
     public UsuarioOutputDto login(LoginRequest usuario) {
-        String sql = "SELECT * FROM usuarios WHERE Correo = :login AND Contraseña = :password";
+        String sql = "SELECT * FROM usuarios WHERE BINARY Correo = :login AND BINARY Contraseña = :password";
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("login", usuario.getCorreo());
         params.addValue("password", usuario.getContraseña());

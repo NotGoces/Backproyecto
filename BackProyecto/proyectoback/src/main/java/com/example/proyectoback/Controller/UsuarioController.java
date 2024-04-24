@@ -64,18 +64,13 @@ public class UsuarioController {
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/login")
-    public ResponseEntity<UsuarioOutputDto> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            String correo = loginRequest.getCorreo();
-            String contraseña = loginRequest.getContraseña();
-
             if (usuarioService.login(loginRequest) == null) {
-                return ResponseEntity.status(999).body(null);
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Correo y/o contraseña incorrectos");
 
             } else {
                 return ResponseEntity.ok(usuarioService.login(loginRequest));
-
-
             }
         } catch (Exception ex) {
             ex.printStackTrace();
