@@ -4,6 +4,7 @@ import com.example.proyectoback.Dto.LoginRequest;
 import com.example.proyectoback.Dto.UsuarioOutputDto;
 import com.example.proyectoback.Modelo.Usuario;
 import com.example.proyectoback.Repositorio.JDBC.JDBCUsuarioRepositorio;
+import com.example.proyectoback.Servicios.EncriptadoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -17,15 +18,15 @@ import java.util.List;
 public class JDBCUsuarioRepositorioImpl implements JDBCUsuarioRepositorio {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
+    private final EncriptadoService encriptadoService;
 
     @Override
     public UsuarioOutputDto login(LoginRequest usuario) {
-        String sql = "SELECT * FROM usuarios WHERE BINARY Correo = :login AND BINARY Contraseña = :password";
+        String sql = "SELECT * FROM usuarios WHERE BINARY Correo = :login";
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("login", usuario.getCorreo());
-        params.addValue("password", usuario.getContraseña());
         List<Usuario> usuarios = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(Usuario.class));
-        if (usuarios.isEmpty()){
+        if (usuarios.isEmpty() || !encriptadoService.verificar(usuario.getContraseña(), usuarios.get(0).getContraseña())) {
             return null;
         }
         UsuarioOutputDto usuarioOutputDto = new UsuarioOutputDto();
@@ -34,5 +35,4 @@ public class JDBCUsuarioRepositorioImpl implements JDBCUsuarioRepositorio {
         usuarioOutputDto.setCodRol(usuarios.get(0).getCodRol());
         return usuarioOutputDto;
     }
-
 }

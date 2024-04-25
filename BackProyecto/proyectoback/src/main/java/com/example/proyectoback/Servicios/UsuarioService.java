@@ -2,7 +2,6 @@ package com.example.proyectoback.Servicios;
 
 import com.example.proyectoback.Dto.LoginRequest;
 import com.example.proyectoback.Dto.UsuarioOutputDto;
-import com.example.proyectoback.Modelo.Grupo;
 import com.example.proyectoback.Modelo.Usuario;
 import com.example.proyectoback.Repositorio.JDBC.JDBCUsuarioRepositorio;
 import com.example.proyectoback.Repositorio.UsuarioRepositorio;
@@ -21,12 +20,16 @@ public class UsuarioService {
 
     private final JDBCUsuarioRepositorio JDBCUsuarioRepositorio;
 
+    private final EncriptadoService encriptadoService;
+
 
     public List<Usuario> usuarios() {
         return new ArrayList<>(usuarioRepositorio.findAll());
     }
 
     public Usuario nuevoUsuario(Usuario usuario) {
+        String hashcontraseña=encriptadoService.encriptar(usuario.getContraseña());
+        usuario.setContraseña(hashcontraseña);
         return this.usuarioRepositorio.save(usuario);
     }
 
