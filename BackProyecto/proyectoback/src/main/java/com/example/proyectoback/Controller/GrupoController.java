@@ -54,6 +54,7 @@ public class GrupoController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @PutMapping("/cambiarEstado/{id}")
     public ResponseEntity<String> cambiarEstadoGrupo(@PathVariable("id") Integer id) {
         try {
