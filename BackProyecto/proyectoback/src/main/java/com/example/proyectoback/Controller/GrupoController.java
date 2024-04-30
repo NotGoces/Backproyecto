@@ -27,6 +27,7 @@ public class GrupoController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/mostrarbyuser")
     public ResponseEntity<List<Grupo>> getGrupoByUser(@RequestParam Integer id) {
         try {
