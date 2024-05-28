@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 @RequestMapping("/grupo")
 public class GrupoController {
 

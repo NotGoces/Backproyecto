@@ -9,10 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 @RequestMapping("/chip")
 public class ChipController {
 
@@ -77,5 +79,15 @@ public class ChipController {
         }catch (Exception ex){
             ex.printStackTrace();
         }
+    }
+
+    @GetMapping("/mostrarbychip")
+    public ResponseEntity<Optional<Chip>> getChipoById(@RequestParam Integer id) {
+        try {
+            return ResponseEntity.ok(chipService.encontrarChip(id));
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 }

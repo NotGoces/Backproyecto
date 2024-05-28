@@ -79,6 +79,4 @@ public class ChipService {
     public List<Chip> chips() {
         return new ArrayList<>(chipRepositorio.findAll());
     }
-
-
 }
