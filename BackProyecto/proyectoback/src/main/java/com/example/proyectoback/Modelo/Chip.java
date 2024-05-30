@@ -30,4 +30,7 @@ public class Chip {
 
     @Column(name = "CodGrupo", nullable = false)
     private Integer codGrupo;
+
+    @Column(name = "Memoria", nullable = false)
+    private String memoria;
 }
