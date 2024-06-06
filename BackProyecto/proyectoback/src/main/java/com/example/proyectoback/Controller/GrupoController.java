@@ -18,6 +18,7 @@ public class GrupoController {
 
     private final GrupoService grupoService;
 
+
     @PostMapping("/crear")
     public ResponseEntity<String> crearGrupo(@RequestBody Grupo grupo) {
         try {
@@ -33,6 +34,17 @@ public class GrupoController {
     public ResponseEntity<List<Grupo>> getGrupoByUser(@RequestParam Integer id) {
         try {
             return ResponseEntity.ok(grupoService.encontrarGruposPorUsuario(id));
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/mostrarbyid")
+    public ResponseEntity<Grupo> getGrupoById(@RequestParam Integer id) {
+        try {
+            return ResponseEntity.ok(grupoService.encontrarGrupo(id).orElse(null));
         } catch (Exception ex){
             ex.printStackTrace();
         }
