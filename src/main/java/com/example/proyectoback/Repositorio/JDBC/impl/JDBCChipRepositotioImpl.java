@@ -36,6 +36,6 @@ public class JDBCChipRepositotioImpl implements JDBCChipRepositorio {
 
     @Override
     public void cambiarTaplinkChip(Integer idChip) {
-        String SQL= "UPDATE CHIP SET taplink = :taplink WHERE id_chip = :idChip";
+        String SQL= "UPDATE chip SET taplink = :taplink WHERE id_chip = :idChip";
     }
 }
