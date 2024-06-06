@@ -19,9 +19,6 @@ public class Chip {
     @Column(name = "Estado", nullable = false)
     private Boolean estado = false;
 
-    @Column(name = "ZipLink", nullable = false)
-    private String zipLink;
-
     @Column(name = "TapLink")
     private String tapLink;
 

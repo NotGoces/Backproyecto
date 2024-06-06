@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,8 @@ public class ChipController {
         try {
             Chip chipNuevo = chipService.nuevoChip(chip);
             return ResponseEntity.status(HttpStatus.CREATED).body("Chip creado correctamente");
-        } catch (Exception ex){
+        } catch (Exception ex) {
+            ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el chip");
         }
     }
@@ -34,7 +36,7 @@ public class ChipController {
     public ResponseEntity<List<Chip>> getChipoByUser(@RequestParam Integer id) {
         try {
             return ResponseEntity.ok(chipService.encontrarChipsPorUsuario(id));
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
@@ -50,7 +52,7 @@ public class ChipController {
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el chip con el ID especificado");
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al borrar el chip");
         }
@@ -66,7 +68,7 @@ public class ChipController {
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el chip con el ID especificado");
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error al cambiar el estado del chip");
         }
@@ -74,9 +76,9 @@ public class ChipController {
 
     @PutMapping("/modificar")
     public void modificarChip(@RequestBody ChipInputDto chip) {
-        try{
-             chipService.modificarChip(chip);
-        }catch (Exception ex){
+        try {
+            chipService.modificarChip(chip);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -85,7 +87,7 @@ public class ChipController {
     public ResponseEntity<Optional<Chip>> getChipoById(@RequestParam Integer id) {
         try {
             return ResponseEntity.ok(chipService.encontrarChip(id));
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
