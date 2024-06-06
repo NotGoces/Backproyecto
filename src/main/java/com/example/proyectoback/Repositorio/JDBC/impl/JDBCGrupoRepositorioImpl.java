@@ -17,7 +17,7 @@ public class JDBCGrupoRepositorioImpl implements JDBCGrupoRepositorio {
 
     @Override
     public List<Grupo> findGrupoByIdUsuario(Integer idUsuario) {
-        String sql = "SELECT * FROM Grupo WHERE IdUsuario = :idUsuario";
+        String sql = "SELECT * FROM grupo WHERE IdUsuario = :idUsuario";
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("idUsuario", idUsuario);
         return jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(Grupo.class));
@@ -25,6 +25,6 @@ public class JDBCGrupoRepositorioImpl implements JDBCGrupoRepositorio {
 
     @Override
     public void cambiarEstadoGrupo(Integer idGrupo) {
-        String SQL= "UPDATE GRUPO SET Estado = :Estado WHERE IdGrupo = :IdGrupo";
+        String SQL= "UPDATE grupo SET Estado = :Estado WHERE IdGrupo = :IdGrupo";
     }
 }

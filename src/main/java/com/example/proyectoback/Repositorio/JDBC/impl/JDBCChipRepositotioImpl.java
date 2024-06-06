@@ -18,7 +18,7 @@ public class JDBCChipRepositotioImpl implements JDBCChipRepositorio {
 
     @Override
     public List<Chip> findChipByIdUsuario(Integer codgrupo) {
-        String sql = "SELECT * FROM Chip WHERE codgrupo = :codgrupo";
+        String sql = "SELECT * FROM chip WHERE codgrupo = :codgrupo";
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("codgrupo", codgrupo);
         return jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(Chip.class));
@@ -26,12 +26,12 @@ public class JDBCChipRepositotioImpl implements JDBCChipRepositorio {
 
     @Override
     public void cambiarEstadoChip(Integer idChip) {
-        String SQL= "UPDATE CHIP SET estado = :estado WHERE id_chip = :idChip";
+        String SQL= "UPDATE chip SET estado = :estado WHERE id_chip = :idChip";
     }
 
     @Override
     public void cambiarNombreChip(Integer idChip) {
-        String SQL= "UPDATE CHIP SET nombre = :nombre WHERE id_chip = :idChip";
+        String SQL= "UPDATE chip SET nombre = :nombre WHERE id_chip = :idChip";
     }
 
     @Override
